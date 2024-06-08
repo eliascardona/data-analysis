@@ -16,6 +16,7 @@ y=as.vector(base[,5])
 
 #### MATRIZ DE GRAFICOS DE DISPERSIÓN ####
 plot(base)
+base
 
 #### MATRIZ DE CORRELACIÓN ####
 print(round(cor(base),3))
@@ -28,13 +29,17 @@ print(summary(modelo))
 
 
 #### INTERVALOS DE CONFIANZA ####
-print(confint(modelo,level=0.99))
+print(confint(modelo, level=0.95))
+print(confint(modelo, level=0.99))
 
 #### PRUEBA DE NORMALIDAD DE RESIUDOS ####
 residuos = rstandard(modelo)
 residuos
 qqnorm(residuos, col="blue")
 qqline(residuos, col="red")
+#### PRUEBA SHAPIRO PARA PROBAR NORMALIDAD DE RESIUDOS ####
+shapiro.test(modelo$residuals)
+
 
 
 #### VALORES AJUSTADOS ####
@@ -72,8 +77,7 @@ m4 = lm(y~x1+x2+x3)
 m5 = lm(y~x1+x2+x4)
 m6 = lm(y~x1+x3+x4)
 m7 = lm(y~x1+x2+x3+x4)
-
-
+coef(m5)
 
 
 
@@ -99,21 +103,41 @@ print(AIC(m4))
 print(AIC(m5))
 print(AIC(m6))
 print(AIC(m7))
-
-
 #print("=================================== anova final  ================================================")
 anova = aov(modelo)
 print(anova(m0, m1, m2, m3, m4, m5, m6, m7, modelo))
-
 
 
 #### FIT POINTS ####
 fitpoints = predict(modelo)
 print(fitpoints)
 fit = lm(y~x1+x2+x3+x4)
-#broom::augment(fit)
-
+broom::augment(fit)
 leveragePlots(fit, layout = c(2,2))
+
+
+base3=base[-3-6-8,]
+
+#### DEFINIR ELEMENTOS ####
+nx1=as.vector(base3[,1])
+nx2=as.vector(base3[,2])
+nx3=as.vector(base3[,3])
+nx4=as.vector(base3[,4])
+ny=as.vector(base3[,5])
+
+#### MODELO ####
+nm5 = lm(ny~nx1+nx2+nx4)
+
+#### REPORTES ####
+summary(nm5)
+AIC(nm5)
+
+
+
+
+
+
+
 
 
 

@@ -1,8 +1,7 @@
 #### DECLARACION DE LIBRERIAS A UTILIZAR ####
+library(broom)
 library(car)
-library(plot3D)
 library(rgl)
-library(plot3Drgl)
 library(lmtest)
 
 #### ABRIR LOS DATOS ####
@@ -79,13 +78,11 @@ m1 = lm(y~x4+x1)
 m2 = lm(y~x4+x2)
 m3 = lm(y~x4+x3)
 m4 = lm(y~x4+x5)
-
 m5 = lm(y~x4+x3+x2)
 m6 = lm(y~x4+x2+x1)
 m7 = lm(y~x4+x2+x5)
 m8 = lm(y~x4+x1+x5)
 m9 = lm(y~x4+x3+x5)
-
 m10 = lm(y~x4+x1+x2+x3)
 m11 = lm(y~x4+x1+x2+x5)
 m12 = lm(y~x4+x3+x2+x5)
@@ -130,35 +127,14 @@ print(AIC(m12))
 print(AIC(m13))
 print(AIC(m14))
 
-
-
 #print("=================================== anova final  ================================================")
 anova = aov(modelo)
 print(anova(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, modelo))
-
-
 
 #### FIT POINTS ####
 fitpoints = predict(modelo)
 print(fitpoints)
 fit = lm(y ~ x1 + x2 + x3 + x4 + x5)
 
-
-
-#broom:argument(fit)
+#broom::augment(fit)
 leveragePlots(fit, layout = c(2,2))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
