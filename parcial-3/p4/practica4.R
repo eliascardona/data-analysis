@@ -116,7 +116,9 @@ broom::augment(fit)
 leveragePlots(fit, layout = c(2,2))
 
 
-base3=base[-3-6-8,]
+base3=base[-2,]
+base3
+
 
 #### DEFINIR ELEMENTOS ####
 nx1=as.vector(base3[,1])
